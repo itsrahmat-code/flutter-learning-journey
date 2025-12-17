@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "360569286344",
+    "project_id": "softvance-7d0f0",
+    "storage_bucket": "softvance-7d0f0.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:360569286344:android:47decc9e1b941968583ffd",
+        "android_client_info": {
+          "package_name": "com.example.untitled"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRjqDVbKQ2sqgKhr4PfoS_ZWZ5eOMWilA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
