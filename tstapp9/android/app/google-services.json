@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "126442463674",
+    "project_id": "tstapp9-bf6e0",
+    "storage_bucket": "tstapp9-bf6e0.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:126442463674:android:61720ca2e9dd97884d7d83",
+        "android_client_info": {
+          "package_name": "com.example.tstapp9"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAk3KnAg9t6fQ7C9ncwlf7SMCC0g_mHAJY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
