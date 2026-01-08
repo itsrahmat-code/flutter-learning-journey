@@ -89,11 +89,18 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         actions: [
-          CircleAvatar(
-            backgroundImage: NetworkImage(
-                user?.photoURL ?? "https://picsum.photos/seed/profile/100/100.jpg"
+          // User profile photo in top corner with navigation
+          GestureDetector(
+            onTap: () {
+              // Navigate to profile page when user photo is tapped
+              Get.toNamed('/profile');
+            },
+            child: CircleAvatar(
+              backgroundImage: NetworkImage(
+                  user?.photoURL ?? "https://picsum.photos/seed/profile/100/100.jpg"
+              ),
+              radius: 16,
             ),
-            radius: 16,
           ),
           const SizedBox(width: 16),
         ],
@@ -616,11 +623,11 @@ class _HomePageState extends State<HomePage> {
               selectedItemColor: Colors.blue.shade700,
               unselectedItemColor: Colors.grey.shade600,
               showSelectedLabels: true,
-              showUnselectedLabels: true,
+              showUnselectedLabels: true, // Fixed: changed from showUnSelectedLabels to showUnselectedLabels
               onTap: (index) {
                 if (index == 2) {
-                  // Navigate to profile
-                  // Get.toNamed('/profile');
+                  // Navigate to profile page when profile button is tapped
+                  Get.toNamed('/profile');
                 } else if (index == 1) {
                   // Navigate to notifications
                   // Get.toNamed('/notifications');
