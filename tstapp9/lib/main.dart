@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-// Make sure these imports are correct for your project structure
+import 'package:flutter/services.dart';
+
 import 'package:tstapp9/pages/home_page.dart';
 import 'package:tstapp9/pages/login_page.dart';
 import 'package:tstapp9/pages/register_page.dart';
-import 'package:flutter/services.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,8 +22,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'SayaraHub',
-      // The initial page is now our LandingPage
-      home: LandingPage(),
+      home: const LandingPage(),
       getPages: [
         GetPage(name: '/login', page: () => LoginPage()),
         GetPage(name: '/register', page: () => RegisterPage()),
@@ -33,14 +32,12 @@ class MyApp extends StatelessWidget {
   }
 }
 
-/// This is the new landing page that will be shown first.
-/// It contains the design you provided.
+/// ================= LANDING PAGE =================
 class LandingPage extends StatelessWidget {
   const LandingPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // Set status bar style for this page
     SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
@@ -52,17 +49,26 @@ class LandingPage extends StatelessWidget {
       backgroundColor: Colors.white,
       body: Column(
         children: [
-          // ===== Header Section =====
+          // ===== HEADER SECTION =====
           Container(
             width: double.infinity,
-            padding: const EdgeInsets.symmetric(vertical: 70, horizontal: 20),
+            padding: const EdgeInsets.only(top: 70, bottom: 20, left: 20, right: 20),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                // ✅ 1. PHOTO/LOGO (Now at the top)
+                Image.asset(
+                  'asset/img/logo.png',
+                  height: 80, // Adjusted height for better proportion
+                ),
+                const SizedBox(height: 10),
+
+                // ✅ 2. TEXT (Under the photo)
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Text(
-                      "Sayara",
+                      "Garage",
                       style: TextStyle(
                         fontSize: 42,
                         fontWeight: FontWeight.bold,
@@ -98,7 +104,9 @@ class LandingPage extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: 4),
+                const SizedBox(height: 6),
+
+                // Description Text
                 const Text(
                   "Your All-in-One Auto Service Partner",
                   style: TextStyle(fontSize: 12, color: Colors.black54),
@@ -106,8 +114,10 @@ class LandingPage extends StatelessWidget {
               ],
             ),
           ),
+
           const SizedBox(height: 60),
-          // ===== Middle Section =====
+
+          // ===== CENTER TEXT (UNCHANGED) =====
           Expanded(
             child: Center(
               child: Stack(
@@ -115,18 +125,18 @@ class LandingPage extends StatelessWidget {
                   Text(
                     "Find",
                     style: TextStyle(
-                      fontSize: 36,
+                      fontSize: 56,
                       fontStyle: FontStyle.italic,
                       foreground: Paint()
                         ..style = PaintingStyle.stroke
-                        ..strokeWidth = 1.5
+                        ..strokeWidth = 1.9
                         ..color = Colors.lightBlue,
                     ),
                   ),
                   const Text(
                     "Find",
                     style: TextStyle(
-                      fontSize: 36,
+                      fontSize: 56,
                       fontStyle: FontStyle.italic,
                       color: Colors.white,
                     ),
@@ -136,31 +146,48 @@ class LandingPage extends StatelessWidget {
             ),
           ),
 
-          // ===== Bottom Button =====
+          // ===== BUTTON SECTION (UPDATED 3D DESIGN) =====
           Padding(
-            padding: const EdgeInsets.all(0),
-            child: SizedBox(
-              width: double.infinity,
-              height: 65,
-              child: ElevatedButton(
-                onPressed: () {
-                  // ✅ On button press, navigate to the AuthWrapper
-                  // to check the user's login status.
-                  Get.off(() => const AuthWrapper());
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blueAccent,
-                  elevation: 6,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(22),
-                  ),
+            padding: const EdgeInsets.only(left: 20.0, right: 20.0, bottom: 40.0, top: 20.0),
+            child: GestureDetector(
+              onTap: () {
+                Get.off(() => const AuthWrapper());
+              },
+              child: Container(
+                height: 65,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: Colors.blueAccent,
+                  borderRadius: BorderRadius.circular(22),
+                  // This shadow creates the "Coming out of screen" 3D effect
+                  boxShadow: [
+                    // Bottom-right shadow (darker) - creates depth
+                    BoxShadow(
+                      color: Colors.blue.shade900.withOpacity(0.4),
+                      offset: const Offset(6, 6),
+                      blurRadius: 10,
+                      spreadRadius: 1,
+                    ),
+                    // Top-left highlight (lighter) - creates the "pressed/raised" feel
+                    BoxShadow(
+                      color: Colors.blueAccent.withOpacity(0.8),
+                      offset: const Offset(-2, -2),
+                      blurRadius: 6,
+                      spreadRadius: 1,
+                    ),
+                  ],
                 ),
-                child: Row(
+                child: const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
+                  children: [
                     Text(
                       "Let's Go",
-                      style: TextStyle(fontSize: 18, color: Colors.white),
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: 0.5,
+                      ),
                     ),
                     SizedBox(width: 8),
                     Icon(Icons.arrow_forward, color: Colors.white),
@@ -175,9 +202,7 @@ class LandingPage extends StatelessWidget {
   }
 }
 
-
-/// 🔐 Checks if user is logged in or not.
-/// This page is now shown only AFTER the user clicks "Let's Go".
+/// ================= AUTH WRAPPER =================
 class AuthWrapper extends StatelessWidget {
   const AuthWrapper({Key? key}) : super(key: key);
 
@@ -186,17 +211,14 @@ class AuthWrapper extends StatelessWidget {
     return StreamBuilder<User?>(
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (context, snapshot) {
-        // Show a loading indicator while checking the authentication state
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Scaffold(
             body: Center(child: CircularProgressIndicator()),
           );
         }
-        // If a user is logged in, navigate to the main app page
         if (snapshot.hasData) {
           return HomePage();
         }
-        // If no user is logged in, navigate to the login page
         return LoginPage();
       },
     );
