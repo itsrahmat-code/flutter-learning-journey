@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:tstapp9/controller/auth_controller.dart';
+import 'package:tstapp9/pages/profile_page.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({super.key});
@@ -16,7 +17,7 @@ class _HomePageState extends State<HomePage> {
 
   // Selected values for dropdowns
   String selectedLocation = "Dubai";
-  String? selectedService; // Using nullable String instead of placeholder text
+  String? selectedService;
 
   // List of locations and services
   final List<String> locations = ["Dubai", "Abu Dhabi", "Sharjah", "Ajman", "Umm Al Quwain", "Ras Al Khaimah", "Fujairah"];
@@ -81,7 +82,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         title: Text(
-          "SayaraHub",
+          "GarageHub",
           style: TextStyle(
             color: Colors.black87,
             fontWeight: FontWeight.bold,
@@ -93,7 +94,7 @@ class _HomePageState extends State<HomePage> {
           GestureDetector(
             onTap: () {
               // Navigate to profile page when user photo is tapped
-              Get.toNamed('/profile');
+              Get.to(const ProfilePage());
             },
             child: CircleAvatar(
               backgroundImage: NetworkImage(
@@ -623,11 +624,12 @@ class _HomePageState extends State<HomePage> {
               selectedItemColor: Colors.blue.shade700,
               unselectedItemColor: Colors.grey.shade600,
               showSelectedLabels: true,
-              showUnselectedLabels: true, // Fixed: changed from showUnSelectedLabels to showUnselectedLabels
+              showUnselectedLabels: true,
               onTap: (index) {
                 if (index == 2) {
-                  // Navigate to profile page when profile button is tapped
-                  Get.toNamed('/profile');
+                  // --- FIXED NAVIGATION HERE ---
+                  // Changed from Get.toNamed to Get.to with the widget directly
+                  Get.to(const ProfilePage());
                 } else if (index == 1) {
                   // Navigate to notifications
                   // Get.toNamed('/notifications');
